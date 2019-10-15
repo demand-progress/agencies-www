@@ -2,14 +2,14 @@
 
 .home-agency {
   border: 2px solid $gray;
-  padding: 15px;
+  padding: 25px;
   margin-bottom: 20px;
   a.header{
     color: $black;
     display: flex;
     justify-content: space-between;
     h3{
-      font-size: 1.3em;
+      font-size: 1.4em;
       margin: 0;
       span{
         font-weight: normal;
@@ -21,7 +21,7 @@
   .subtitle{
     display: flex;
     justify-content: space-between;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     padding-top: 10px;
     margin-bottom: 20px;
     > div {
@@ -38,6 +38,8 @@
   }
   .desc{
     margin-bottom: 20px;
+    line-height: 1.4;
+    font-size: 0.9rem;
   }
   .quorum{
     text-align: right;
