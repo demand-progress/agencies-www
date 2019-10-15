@@ -1,0 +1,111 @@
+@import '../../styles/mixins';
+
+.home-agency {
+  border: 2px solid $gray;
+  padding: 15px;
+  margin-bottom: 20px;
+  a.header{
+    color: $black;
+    display: flex;
+    justify-content: space-between;
+    h3{
+      font-size: 1.3em;
+      margin: 0;
+      span{
+        font-weight: normal;
+        font-size: 0.9rem;
+        color: $gray;
+      }
+    }
+  }
+  .subtitle{
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    padding-top: 10px;
+    margin-bottom: 20px;
+    > div {
+      display: flex;
+      color: $purple;
+      font-weight: bold;
+      .label{
+        color: $gray;
+        display: inline-block;
+        padding-right: 5px;
+        font-weight: normal;
+      }
+    }
+  }
+  .desc{
+    margin-bottom: 20px;
+  }
+  .quorum{
+    text-align: right;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+  .member{
+    background-color: $gray-light;
+    display: flex;
+    margin-bottom: 10px;
+    .info{
+      padding: 10px 15px;
+      flex-grow: 1;
+    }
+    .top{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .name{
+        font-weight: bold;
+        font-size: 1.1rem;
+        span{
+          font-weight: normal;
+          color: $gray;
+          font-size: 0.9rem;
+        }
+      }
+      .term{
+        font-weight: bold;
+        color: $gray;
+      }
+    }
+    .status{
+      width: 50px;
+      background-color: $gray;
+    }
+    &.republican{
+      .status{
+        background-color: $red-light;
+      }
+      &.vacant{
+        .status{
+          width: 42px;
+          background-color: #fff;
+          border: 4px solid $red-light;
+        }
+      }
+    }
+    &.democrat{
+      .status{
+        background-color: $blue;
+      }
+      &.vacant{
+        .status{
+          width: 42px;
+          background-color: #fff;
+          border: 4px solid $blue;
+        }
+      }
+    }
+    &.expired,
+    &.pending,
+    &.vacant{
+      .top{
+        .term{
+          color: $red;
+        }
+      }
+    }
+  }
+}
