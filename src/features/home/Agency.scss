@@ -1,111 +1,219 @@
 @import '../../styles/mixins';
 
 .home-agency {
-  border: 2px solid $gray;
-  padding: 25px;
+  border: 2px solid $gray-med;
+  padding: 0px;
   margin-bottom: 20px;
+  position: relative;
+  * {
+    // transition: all 0.3s linear;
+  }
   a.header{
     color: $black;
     display: flex;
     justify-content: space-between;
+    padding: 25px;
+    cursor: pointer;
     h3{
       font-size: 1.4em;
       margin: 0;
       span{
         font-weight: normal;
         font-size: 0.9rem;
-        color: $gray;
+        color: $text-gray;
       }
     }
   }
-  .subtitle{
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.85rem;
-    padding-top: 10px;
-    margin-bottom: 20px;
-    > div {
-      display: flex;
-      color: $purple;
-      font-weight: bold;
-      .label{
-        color: $gray;
-        display: inline-block;
-        padding-right: 5px;
-        font-weight: normal;
-      }
+  // closed
+  > .bottom {
+    .subtitle,
+    .desc,
+    .quorum{
+      max-height: 0;
+      overflow: hidden;
+      padding: 0;
+      margin: 0;
     }
-  }
-  .desc{
-    margin-bottom: 20px;
-    line-height: 1.4;
-    font-size: 0.9rem;
-  }
-  .quorum{
-    text-align: right;
-    font-size: 0.9rem;
-    margin-bottom: 10px;
-  }
-  .member{
-    background-color: $gray-light;
-    display: flex;
-    margin-bottom: 10px;
-    .info{
-      padding: 10px 15px;
-      flex-grow: 1;
-    }
-    .top{
+    .subtitle{
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      .name{
+      font-size: 0.85rem;
+      > div {
+        display: flex;
+        color: $purple;
         font-weight: bold;
-        font-size: 1.1rem;
-        span{
+        .label{
+          color: $text-gray;
+          display: inline-block;
+          padding-right: 5px;
           font-weight: normal;
-          color: $gray;
-          font-size: 0.9rem;
         }
       }
-      .term{
-        font-weight: bold;
-        color: $gray;
-      }
     }
-    .status{
-      width: 50px;
-      background-color: $gray;
+    .desc{
+      line-height: 1.4;
+      font-size: 0.9rem;
     }
-    &.republican{
-      .status{
-        background-color: $red-light;
-      }
-      &.vacant{
+    .quorum{
+      text-align: right;
+      font-size: 0.9rem;
+    }
+    .members {
+      display: flex;
+      position: absolute;
+      right: 25px;
+      top: 20px;
+      $boxWidth: 35px;
+      .member{
+        display: flex;
+        .info{
+          max-width: 0px;
+          overflow: hidden;
+          height: $boxWidth;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
         .status{
-          width: 42px;
-          background-color: #fff;
-          border: 4px solid $red-light;
+          width: $boxWidth;
+          background-color: $gray-med;
+          margin-right: 5px;
+          background-repeat: no-repeat;
+          background-position: center center;
+        }
+        &.vacant{
+          .status{
+            width: $boxWidth - 8;
+            background-color: #fff;
+            border: 4px solid $black;
+          }
+        }
+        &.republican{
+          .status{
+            background-color: $red-light;
+          }
+          &.vacant{
+            .status{
+              border-color: $red;
+              background-color: #fff;
+            }
+          }
+        }
+        &.democrat{
+          .status{
+            background-color: $blue-light;
+          }
+          &.vacant{
+            .status{
+              border-color: $blue;
+              background-color: #fff;
+            }
+          }
+        }
+        &.expired{
+          .status{
+            background-image: url(../images/expired-whiteX.svg);
+            background-size: 45%;
+          }
+        }
+        &.pending{
+          .status{
+            background-image: url(../images/diagonal-lines.svg);
+            // background-size: 45%;
+          }
+        }
+        &.expired,
+        &.pending,
+        &.vacant{
+          .top{
+            .term{
+              color: $red;
+            }
+          }
         }
       }
     }
-    &.democrat{
-      .status{
-        background-color: $blue;
+  }
+  // OPEN //
+  &.open{
+    a.header{
+      padding-bottom: 0;
+    }
+    > .bottom{
+      .subtitle,
+      .desc,
+      .quorum{
+        max-height: 500px;
       }
-      &.vacant{
+    }
+    > .bottom{
+      padding: 0px 25px 25px 25px;
+    }
+    .subtitle{
+      padding-top: 10px;
+      margin-bottom: 20px;
+      > div {
+        .label{
+          padding-right: 5px;
+        }
+      }
+    }
+    .desc{
+      margin-bottom: 20px;
+    }
+    .quorum{
+      margin-bottom: 10px;
+    }
+    .members {
+      display: block;
+      position: relative;
+      top: 0;
+      right: auto;
+      .member{
+        background-color: $gray-light;
+        margin-bottom: 10px;
+        min-height: 65px;
+        .info{
+          padding: 10px 15px;
+          flex-grow: 1;
+          max-width: 100%;
+          height: auto;
+        }
         .status{
-          width: 42px;
-          background-color: #fff;
-          border: 4px solid $blue;
+          margin-right: 0;
+          width: 50px;
         }
-      }
-    }
-    &.expired,
-    &.pending,
-    &.vacant{
-      .top{
-        .term{
-          color: $red;
+        &.vacant{
+          .status{
+            width: 42px;
+          }
+        }
+        .top{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .name{
+            font-weight: bold;
+            font-size: 1.1rem;
+            span{
+              font-weight: normal;
+              color: $text-gray;
+              font-size: 0.9rem;
+            }
+          }
+          .term{
+            font-weight: bold;
+            color: $text-gray;
+            text-align: right;
+          }
+        }
+        .bottom{
+          margin-top: 7px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          color: $text-gray;
+          font-size: 0.8rem;
         }
       }
     }

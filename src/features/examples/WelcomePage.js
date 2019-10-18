@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import rekitLogo from '../../images/rekit-logo.svg';
 import * as actions from './redux/actions';
 
 export class WelcomePage extends Component {
@@ -15,7 +14,6 @@ export class WelcomePage extends Component {
     return (
       <div className="examples-welcome-page">
         <a href="http://github.com/supnate/rekit">
-          <img src={rekitLogo} className="app-logo" alt="logo" />
         </a>
         <h1>Welcome to Rekit!</h1>
         <p>

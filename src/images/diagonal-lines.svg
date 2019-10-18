@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="115px" height="115px" viewBox="0 0 115 115" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59 (86127) - https://sketch.com -->
+    <title>Line 7 + Line 7 Copy 9 + Line 7 Copy + Line 7 Copy 10 + Line 7 Copy 2 + Line 7 Copy 11 + Line 7 Copy 3 + Line 7 Copy 12 + Line 7 Copy 4 + Line 7 Copy 13 + Line 7 Copy 5 + Line 7 Copy 6 + Line 7 Copy 7 + Line 7 Copy 8 Mask</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0.0521823756" y="0.0950755945" width="115" height="115"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Line-7-+-Line-7-Copy-9-+-Line-7-Copy-+-Line-7-Copy-10-+-Line-7-Copy-2-+-Line-7-Copy-11-+-Line-7-Copy-3-+-Line-7-Copy-12-+-Line-7-Copy-4-+-Line-7-Copy-13-+-Line-7-Copy-5-+-Line-7-Copy-6-+-Line-7-Copy-7-+-Line-7-Copy-8-Mask" transform="translate(-0.052182, -0.095076)">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <g id="Mask"></g>
+            <line x1="0.246203014" y1="140.960452" x2="140.98125" y2="0.225405755" id="Line-7" stroke="#FFFFFF" stroke-width="5" stroke-linecap="square" mask="url(#mask-2)"></line>
+            <line x1="42.6622113" y1="183.397258" x2="183.397258" y2="42.6622113" id="Line-7-Copy-9" stroke="#FFFFFF" stroke-width="5" stroke-linecap="square" mask="url(#mask-2)"></line>
+            <line x1="-8.24947699" y1="132.48557" x2="132.48557" y2="-8.24947699" id="Line-7-Copy" stroke="#FFFFFF" stroke-width="5" stroke-linecap="square" mask="url(#mask-2)"></line>
+            <line x1="34.8840367" y1="174.20487" x2="175.619083" y2="33.4698231" id="Line-7-Copy-10" stroke="#FFFFFF" stroke-width="5" stroke-linecap="square" mask="url(#mask-2)"></line>
+            <line x1="-16.7347584" y1="124.000288" x2="124.000288" y2="-16.7347584" id="Line-7-Copy-2" stroke="#FFFFFF" stroke-width="5" stroke-linecap="square" mask="url(#mask-2)"></line>
+            <line x1="26.3987553" y1="165.719588" x2="167.133802" y2="24.9845417" id="Line-7-Copy-11" stroke="#FFFFFF" stroke-width="5" stroke-linecap="square" mask="url(#mask-2)"></line>
+            <line x1="-25.2200397" y1="115.515007" x2="115.515007" y2="-25.2200397" id="Line-7-Copy-3" stroke="#FFFFFF" stroke-width="5" stroke-linecap="square" mask="url(#mask-2)"></line>
+            <line x1="17.9134739" y1="157.234307" x2="158.648521" y2="16.4992604" id="Line-7-Copy-12" stroke="#FFFFFF" stroke-width="5" stroke-linecap="square" mask="url(#mask-2)"></line>
+            <line x1="-33.7053211" y1="107.029726" x2="107.029726" y2="-33.7053211" id="Line-7-Copy-4" stroke="#FFFFFF" stroke-width="5" stroke-linecap="square" mask="url(#mask-2)"></line>
+            <line x1="9.42819254" y1="148.749026" x2="150.163239" y2="8.01397898" id="Line-7-Copy-13" stroke="#FFFFFF" stroke-width="5" stroke-linecap="square" mask="url(#mask-2)"></line>
+            <line x1="-42.1906025" y1="98.5444442" x2="98.5444442" y2="-42.1906025" id="Line-7-Copy-5" stroke="#FFFFFF" stroke-width="5" stroke-linecap="square" mask="url(#mask-2)"></line>
+            <line x1="-50.6758839" y1="90.0591629" x2="90.0591629" y2="-50.6758839" id="Line-7-Copy-6" stroke="#FFFFFF" stroke-width="5" stroke-linecap="square" mask="url(#mask-2)"></line>
+            <line x1="-59.1611652" y1="81.5738815" x2="81.5738815" y2="-59.1611652" id="Line-7-Copy-7" stroke="#FFFFFF" stroke-width="5" stroke-linecap="square" mask="url(#mask-2)"></line>
+            <line x1="-68" y1="72.7350467" x2="72.7350467" y2="-68" id="Line-7-Copy-8" stroke="#FFFFFF" stroke-width="5" stroke-linecap="square" mask="url(#mask-2)"></line>
+        </g>
+    </g>
+</svg>

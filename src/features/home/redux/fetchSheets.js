@@ -16,10 +16,12 @@ export function fetchSheets(args = {}) {
     });
 
     const promise = new Promise((resolve, reject) => {
-      GSheetReader({ sheetId: '1hH0Z-OWfEoMrhqQYtfO46nPfA2JXl34ooD_QeB1-40s/2' }, agencies => {
-        GSheetReader({ sheetId: '1hH0Z-OWfEoMrhqQYtfO46nPfA2JXl34ooD_QeB1-40s/1' }, members => {
+      const doc = '1cd_DVCWvzNdgOZZFtuu_UQcIPC5hwNzXRpTLont8Pek'
+      // const doc = '1hH0Z-OWfEoMrhqQYtfO46nPfA2JXl34ooD_QeB1-40s'
+      GSheetReader({ sheetId: `${doc}/2` }, agencies => {
+        GSheetReader({ sheetId: `${doc}/1` }, members => {
           agencies.forEach(ag => {
-            ag.members = members.filter(propEq('abbreviation', ag.abbreviation))
+            ag.members = members.filter(propEq('agency', ag.agency))
           })
           console.log(agencies);
           dispatch({

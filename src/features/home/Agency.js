@@ -8,7 +8,7 @@ export default class Agency extends Component {
     agency: PropTypes.object
   }
   state = {
-    open: false
+    open: false 
   }
   _quorum() {
     const { agency } = this.props
@@ -27,21 +27,40 @@ export default class Agency extends Component {
     </div>
   }
   _member(member, i){
+    const fmt = 'M/D/YYYY'
     const termExpires = moment(member['term expires'], 'M/DD/YYYY')
+    const mustVacate = moment(member['must vacate seat by'], 'M/DD/YYYY')
+    const lastAction = moment(member['latest action'], 'M/DD/YYYY') 
+    const dateReceived = moment(member['dated received from president'], 'M/DD/YYYY') 
     let status = member['term status'].toLowerCase()
     const party = (member['political party'] || '').toLowerCase()
     let name = member.name
-    let term, termAlert
+    let term, termAlert, leftDetails, rightDetails
     if (termExpires.isValid()) {
       if (termExpires.valueOf() < Date.now()) {
         term = `Term Expired ${termExpires.fromNow()}`
-        status = 'expired' 
       } else {
-        term = `Term Expires ${termExpires.format('M/D/YYYY')}`
+        term = `Term Expires ${termExpires.format(fmt)}`
+      }
+      if (lastAction.isValid()) {
+        leftDetails = `Appointed ${lastAction.format(fmt)}`
+        if (dateReceived.isValid()) {
+          leftDetails += ` after ${parseInt(moment.duration(lastAction.diff(dateReceived)).asDays(), 10)} pending`
+        }
       }
     }
+    if (mustVacate.isValid()) {
+      rightDetails = 'Must Vacate by ' + mustVacate.format(fmt)
+    }
     if (status === 'pending') {
-      name = 'Pending Nomination: ' + name
+      name = 'Pending: ' + name
+      leftDetails = ''
+      if (dateReceived.isValid()) {
+        term = `Nominated ${dateReceived.fromNow()}`
+      }
+      if (lastAction.isValid()) {
+        rightDetails = `Latest Congressional action ${lastAction.fromNow()} `
+      }
     }
     return <div className={classNames("member", status, party)} key={i}>
       <div className="status"></div>
@@ -55,6 +74,12 @@ export default class Agency extends Component {
           </div>
         </div>
         <div className="bottom">
+          <div className="left">
+            {leftDetails}
+          </div>
+          <div className="right">
+            {rightDetails}
+          </div>
         </div>
       </div>
     </div>
@@ -62,10 +87,11 @@ export default class Agency extends Component {
   }
 
   render() {
+    const { open } = this.state
     const { agency } = this.props
     return (
-      <div className="home-agency">
-        <a className="header">
+      <div className={classNames("home-agency", { open })}>
+        <a className="header" onClick={() => this.setState({ open: !open })}>
           <h3>{agency.agency} <span>({agency.abbreviation})</span></h3>
         </a>
         <div className="bottom">
@@ -87,7 +113,9 @@ export default class Agency extends Component {
             Lorem ipsum dolor sit amet turducken shoulder hamburger brisket chuck ball tip turkey pork short ribs pig bresaola. Rump brisket tail, meatball chuck ham leberkas frankfurter sausage corned beef pork flank swine meatloaf andouille. Fatback capicola tongue sirloin, pork jerky pig chuck cow bresaola. 
           </div>
           {this._quorum()}
-          {agency.members.map(this._member.bind(this))}
+          <div className="members">
+            {agency.members.map(this._member.bind(this))}
+          </div>
         </div>
       </div>
     );
