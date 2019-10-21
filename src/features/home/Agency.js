@@ -8,7 +8,7 @@ export default class Agency extends Component {
     agency: PropTypes.object
   }
   state = {
-    open: false 
+    open: true 
   }
   _quorum() {
     const { agency } = this.props
@@ -23,7 +23,9 @@ export default class Agency extends Component {
     const vacancies = parseInt(agency['vacancies'], 10)
 
     return <div className={classNames("quorum", { reached })}>
-      {label} ({votingMembers - vacancies}/{votingMembers})
+      <span>
+        {label} ({votingMembers - vacancies}/{votingMembers})
+      </span>
     </div>
   }
   _member(member, i){
