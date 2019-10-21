@@ -8,6 +8,9 @@ import bindAllActions from '../common/redux/bindAllActions'
 import {
   Agency
 } from './'
+import {
+  WpContent
+} from '../common'
 
 class DefaultPage extends Component {
   static propTypes = {
@@ -19,7 +22,10 @@ class DefaultPage extends Component {
     const { agencies } = this.props.home
     return (
       <div className="home-default-page">
-        {agencies.map(a => <Agency agency={a} key={a.abbreviation} />)}
+        <WpContent id={2} />
+        <div className="agencies">
+          {agencies.map(a => <Agency agency={a} key={a.abbreviation} />)}
+        </div>
       </div>
     );
   }
