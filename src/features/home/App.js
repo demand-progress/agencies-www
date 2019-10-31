@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import bindAllActions from '../common/redux/bindAllActions'
+import { Link } from 'react-router-dom'
 /*
   This is the root component of your app. Here you define the overall layout
   and the container of the react router.
@@ -23,6 +24,17 @@ class App extends Component {
   render() {
     return (
       <div className="home-app">
+        <nav id="main_nav">
+          <Link to="/">
+            <img src="http://placekitten.com/400/80"/>
+          </Link>
+          <ul>
+            <li><Link to="/">Tracker</Link></li>
+            <li><Link to="/why">Why?</Link></li>
+            <li><Link to="/news">News</Link></li>
+            <li><a href="https://demandprogress.org">Take Action</a></li>
+          </ul>
+        </nav>
         <div className="page-container">{this.props.children}</div>
       </div>
     );

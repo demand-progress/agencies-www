@@ -3,11 +3,16 @@ $black: #000;
 $white: #fff;
 $gray: #7e7f7c;
 $gray-med: #bebebd;
-$gray-light: #f5f3f3;
+$gray-light: #f8f8f8;
 $red: #b4291f;
 $red-light: #e5b4b1;
 $blue: #14309d;
 $blue-light: #aabae0;
 $purple: #552f71;
 
+$text-dark: $black;
 $text-gray: $gray;
+
+p{
+  line-height: 1.6;
+}

@@ -1,8 +1,39 @@
 @import '../../styles/mixins';
 
 .home-app {
+  #main_nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background-color: $gray-light;
+    ul{
+      display: flex;
+      padding: 0;
+      margin: 0;
+      li{
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        a{
+          display: inline-block;
+          padding: 0 20px;
+          text-decoration: none;
+          color: $text-dark;
+          text-transform: uppercase;
+          &.active,
+          &:hover{
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
   .page-container{
-    max-width: 1000px;
-    margin: 0 auto;
+    padding-top: 70px;
+    .wrap{
+      max-width: 1000px;
+      margin: 0 auto;
+    }
   }
 }

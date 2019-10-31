@@ -1,4 +1,45 @@
 @import '../../styles/mixins';
 
 .home-default-page {
+  .agencies{
+    background-color: $gray-light;
+    padding-top: 30px;
+    margin-top: 30px;
+    .common-wp-content{
+      .content p{
+        color: $text-gray;
+      }
+    }
+    .stats{
+      display: flex;
+      margin-bottom: 25px;
+      margin-top: 25px;
+      .stat{
+        flex-grow: 1;
+        flex-shrink: 1;
+        width: 33.33%;
+        text-align: center;
+        .num{
+          color: $purple;
+          font-size: 50px;
+          font-weight: bold;
+        }
+        h3{
+          margin-top: 10px;
+          margin-bottom: 10px;
+        }
+        .party{
+          font-size: 0.85rem;
+          color: $text-gray;
+          line-height: 1.5;
+          .dem{
+            color: $blue;
+          }
+          .rep{
+            color: $red;
+          }
+        }
+      }
+    }
+  }
 }

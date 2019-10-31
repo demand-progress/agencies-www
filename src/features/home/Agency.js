@@ -8,7 +8,7 @@ export default class Agency extends Component {
     agency: PropTypes.object
   }
   state = {
-    open: true 
+    open: false 
   }
   _quorum() {
     const { agency } = this.props

@@ -4,7 +4,8 @@ import { getApiUrl } from '../../common/lib';
 
 export default class WpContent extends Component {
   static propTypes = {
-    id: PropTypes.number
+    id: PropTypes.number.isRequired,
+    showTitle: PropTypes.bool
   }
   state = {
 
@@ -15,18 +16,21 @@ export default class WpContent extends Component {
         .then(res => res.json())
         .then(res => {
           this.setState({
-            content: res.content.rendered
+            content: res.content.rendered,
+            title: res.title.rendered
           })
         })
     }
   }
 
   render() {
-    const { id } = this.props
-    const { content } = this.state
+    const { id, showTitle } = this.props
+    const { content, title } = this.state
     return (
-      <div className="common-wp-content" id={'content_' + id} dangerouslySetInnerHTML={{ __html: content }}>
+      <div className="common-wp-content" id={'content_' + id}>
+        {showTitle ? <h1>{title}</h1> : null}
+        <div className="content" dangerouslySetInnerHTML={{ __html: content }}></div>
       </div>
-    );
+    )
   }
 }

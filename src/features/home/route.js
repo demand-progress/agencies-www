@@ -1,5 +1,7 @@
 import {
   DefaultPage,
+  News,
+  Why,
 } from './';
 
 export default {
@@ -11,5 +13,7 @@ export default {
       component: DefaultPage,
       isIndex: true,
     },
+    { path: 'news', name: 'News', component: News },
+    { path: 'why', name: 'Why', component: Why },
   ],
 };

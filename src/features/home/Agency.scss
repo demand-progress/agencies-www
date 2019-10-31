@@ -118,6 +118,7 @@
           }
         }
         &.pending{
+          display: none;
           .status{
             background-image: url(../images/diagonal-lines.svg);
             // background-size: 45%;
@@ -201,6 +202,9 @@
           .status{
             width: 42px;
           }
+        }
+        &.pending{
+          display: flex;
         }
         .top{
           display: flex;

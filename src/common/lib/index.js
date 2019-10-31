@@ -1,3 +1,3 @@
 export const getApiUrl = () => {
-  return /localhost/.test(window.location.href) ? 'http://localhost:8888/agencies/' : ''
+  return false && /localhost/.test(window.location.href) ? 'http://localhost:8888/agencies/' : 'http://api.demandprogressaction.org'
 }
