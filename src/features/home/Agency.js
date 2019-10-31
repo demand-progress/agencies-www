@@ -47,7 +47,7 @@ export default class Agency extends Component {
       if (lastAction.isValid()) {
         leftDetails = `Appointed ${lastAction.format(fmt)}`
         if (dateReceived.isValid()) {
-          leftDetails += ` after ${parseInt(moment.duration(lastAction.diff(dateReceived)).asDays(), 10)} pending`
+          leftDetails += ` after ${parseInt(moment.duration(lastAction.diff(dateReceived)).asDays(), 10)} days pending`
         }
       }
     }

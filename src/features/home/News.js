@@ -11,8 +11,10 @@ export default class News extends Component {
   render() {
     return (
       <div className="home-news">
-        <h1>News</h1>
-        <WpPostsList />
+        <div className="wrap">
+          <h1>News</h1>
+          <WpPostsList />
+        </div>
       </div>
     );
   }

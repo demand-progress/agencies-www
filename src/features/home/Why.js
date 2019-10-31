@@ -11,7 +11,9 @@ export default class Why extends Component {
   render() {
     return (
       <div className="home-why">
-        <WpContent id={35} showTitle />
+        <div className="wrap">
+          <WpContent id={35} showTitle />
+        </div>
       </div>
     );
   }
