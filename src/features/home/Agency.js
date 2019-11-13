@@ -1,14 +1,36 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import moment from 'moment'
+import {
+  MemberVotes
+} from './'
+import { VOTE_AGENCIES, pathsChanged, getApiUrl } from '../../common/lib'
+import { join, pluck } from 'ramda'
 
 export default class Agency extends Component {
   static propTypes = {
     agency: PropTypes.object
   }
   state = {
-    open: false 
+    open: false,
+    votes: null,
+    activeVote: null
+  }
+  componentDidUpdate(prevProps, prevState) {
+    const { agency } = this.props
+    const { open, votes } = this.state
+    if (pathsChanged(prevState, this.state, ['open']) && 
+      open &&
+      !votes) {
+      fetch(getApiUrl() + '/?members=' + join(',', pluck('ref', agency.members)))
+        .then(res => res.json())
+        .then(votes => {
+          this.setState({
+            votes
+          })
+        })
+    }
   }
   _quorum() {
     const { agency } = this.props
@@ -29,6 +51,8 @@ export default class Agency extends Component {
     </div>
   }
   _member(member, i){
+    const { agency } = this.props
+    const { activeVote, votes } = this.state
     const fmt = 'M/D/YYYY'
     const termExpires = moment(member['term expires'], 'M/DD/YYYY')
     const mustVacate = moment(member['must vacate seat by'], 'M/DD/YYYY')
@@ -83,6 +107,16 @@ export default class Agency extends Component {
             {rightDetails}
           </div>
         </div>
+        {VOTE_AGENCIES.includes(agency.abbreviation) ? <MemberVotes 
+          onVoteHover={voteI => {
+            this.setState({
+              activeVote: voteI
+            })
+          }}
+          activeVote={activeVote}
+          member={member}
+          votes={votes}
+        /> : null}
       </div>
     </div>
 

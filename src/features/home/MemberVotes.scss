@@ -1,0 +1,78 @@
+@import '../../styles/mixins';
+
+.home-member-votes {
+  h3{
+    color: $text-gray;
+    margin-bottom: 10px;
+    > span{
+      color: $text-dark;
+      small{
+        font-size: 0.8rem;
+        font-weight: normal;
+      }
+    }
+  }
+  .votes{
+    display: flex;
+    justify-content: flex-end;
+    .vote{
+      font-size: 0.8rem;
+      text-align: center;
+      text-transform: capitalize;
+      color: transparent;
+      margin-left: 5px;
+      cursor: pointer;
+      &.active{
+        color: $text-dark;
+      }
+      .block{
+        height: 18px;
+        width: 22px;
+        background-color: $white;
+        border: 2px solid transparent;
+        margin-bottom: 5px;
+      }
+      &.good{
+        .block{
+          background-color: $green;
+        }
+        &.active{
+          .block{
+            border-color: $green-dark;
+          }
+        }
+      }
+      &.bad{
+        .block{
+          background-color: $red-light;
+        }
+        &.active{
+          .block{
+            border-color: $red;
+          }
+        }
+      }
+      &.no-vote{
+        .block{
+          background-color: $white;
+        }
+        &.active{
+          .block{
+            border-color: $gray;
+          }
+        }
+      }
+      &.ineligible{
+        .block{
+          background-color: $gray-med;
+        }
+        &.active{
+          .block{
+            border-color: $gray;
+          }
+        }
+      }
+    }
+  }
+
+}
