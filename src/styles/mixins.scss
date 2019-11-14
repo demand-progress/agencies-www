@@ -15,6 +15,60 @@ $green-dark: #3a772d;
 $text-dark: $black;
 $text-gray: $gray;
 
+$navHeight: 114px;
+
 p{
   line-height: 1.6;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  &.ntm{
+    margin-top: 0;
+  }
+}
+.block{
+  height: 18px;
+  width: 22px;
+  background-color: $white;
+  border: 2px solid transparent;
+  margin-bottom: 5px;
+}
+.good{
+  .block{
+    background-color: $green;
+  }
+  &.active{
+    .block{
+      border-color: $green-dark;
+    }
+  }
+}
+.bad{
+  .block{
+    background-color: $red-light;
+  }
+  &.active{
+    .block{
+      border-color: $red;
+    }
+  }
+}
+.no-vote{
+  .block{
+    background-color: $white;
+  }
+  &.active{
+    .block{
+      border-color: $gray;
+    }
+  }
+}
+.ineligible{
+  .block{
+    background-color: $gray-med;
+  }
+  &.active{
+    .block{
+      border-color: $gray;
+    }
+  }
 }

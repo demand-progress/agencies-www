@@ -3,12 +3,17 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import moment from 'moment'
 import {
-  MemberVotes
+  MemberVotes,
+  VoteDetail
 } from './'
-import { VOTE_AGENCIES, pathsChanged, getApiUrl } from '../../common/lib'
-import { join, pluck } from 'ramda'
+import {
+  withRouter,
+  Link
+} from 'react-router-dom'
+import { VOTE_AGENCIES, pathsChanged, getApiUrl, agencySubtitle } from '../../common/lib'
+import { find, propEq, path, join, pluck } from 'ramda'
 
-export default class Agency extends Component {
+class Agency extends Component {
   static propTypes = {
     agency: PropTypes.object
   }
@@ -30,6 +35,15 @@ export default class Agency extends Component {
             votes
           })
         })
+    }
+  }
+  componentDidMount() {
+    const { agency } = this.props
+    const agencyAbbrev = path(['match', 'params', 'abbr'], this.props)
+    if (agencyAbbrev && agency.abbreviation.toLowerCase() === agencyAbbrev.toLowerCase()) {
+      this.setState({
+        open: true
+      })
     }
   }
   _quorum() {
@@ -114,12 +128,29 @@ export default class Agency extends Component {
             })
           }}
           activeVote={activeVote}
+          abbr={agency.abbreviation}
           member={member}
           votes={votes}
         /> : null}
       </div>
     </div>
-
+  }
+  _vote() {
+    const { match, agency } = this.props
+    const { votes } = this.state
+    const { voteId, abbr } = match.params
+    if (!voteId || abbr.toLowerCase() !== agency.abbreviation.toLowerCase() || !votes) {
+      return null
+    }
+    return <div id="modal">
+      <div className="wrap">
+        <Link to={`/${abbr.toLowerCase()}`} className="close"></Link>
+        <VoteDetail 
+          agency={agency}
+          vote={find(propEq('id', parseInt(voteId, 10)), votes)}
+        />
+      </div>
+    </div>
   }
 
   render() {
@@ -128,23 +159,10 @@ export default class Agency extends Component {
     return (
       <div className={classNames("home-agency", { open })}>
         <a className="header" onClick={() => this.setState({ open: !open })}>
-          <h3>{agency.agency} <span>({agency.abbreviation})</span></h3>
+          <h3 className="agency">{agency.agency} <span>({agency.abbreviation})</span></h3>
         </a>
         <div className="bottom">
-          <div className="subtitle">
-            <div>
-              <div className="label">Established by Statute:</div>
-              {agency.statute}
-            </div>
-            <div>
-              <div className="label">Committee of Jurisdiction:</div>
-              {agency['senate committee with jurisdiction']}
-            </div>
-            <div>
-              <div className="label">Partisan Balance:</div>
-              {agency['political balance required'] === 'Yes' ? 'Required' : 'Not Required'}
-            </div>
-          </div>
+          {agencySubtitle(agency)}
           <div className="desc">
             Lorem ipsum dolor sit amet turducken shoulder hamburger brisket chuck ball tip turkey pork short ribs pig bresaola. Rump brisket tail, meatball chuck ham leberkas frankfurter sausage corned beef pork flank swine meatloaf andouille. Fatback capicola tongue sirloin, pork jerky pig chuck cow bresaola. 
           </div>
@@ -153,7 +171,10 @@ export default class Agency extends Component {
             {agency.members.map(this._member.bind(this))}
           </div>
         </div>
+        {this._vote()}
       </div>
-    );
+    )
   }
 }
+
+export default withRouter(Agency)

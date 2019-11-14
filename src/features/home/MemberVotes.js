@@ -2,26 +2,27 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { find, propEq } from 'ramda'
+import { 
+  Link
+} from 'react-router-dom'
 
 export default class MemberVotes extends Component {
   static propTypes = {
     member: PropTypes.object.isRequired,
     onVoteHover: PropTypes.func,
+    abbr: PropTypes.string,
     votes: PropTypes.array
   }
   state = {
     activeVote: null
   }
   _votes() {
-    const { votes, member, onVoteHover, activeVote } = this.props
+    const { abbr, votes, member, onVoteHover, activeVote } = this.props
     return <div className="votes">
       {(votes || []).map((v, i) => {
         const memberVote = v.member_votes[member.ref]
-        let memberVoteLabel
-        if(['yea', 'nay'].includes(memberVote)) {
-          memberVoteLabel = memberVote
-        }
-        return <a
+        return <Link
+            to={`/${abbr.toLowerCase()}/${v.id}`}
             className={classNames('vote', memberVote, {
               bad: memberVote !== v.preferred_vote,
               good: memberVote === v.preferred_vote,
@@ -40,8 +41,8 @@ export default class MemberVotes extends Component {
             }}
           >
             <div className="block" />
-            {memberVoteLabel}
-          </a>
+            <span className="vote-label">{memberVote}</span>
+          </Link>
       })}
     </div>
   }
@@ -58,7 +59,7 @@ export default class MemberVotes extends Component {
     }
     return (
       <div className="home-member-votes">
-        <h3>
+        <h3 className="key">
           Record on Key Votes:
           {voteTitle}
         </h3>

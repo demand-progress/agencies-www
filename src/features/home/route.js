@@ -8,10 +8,17 @@ export default {
   path: '/',
   name: 'Home',
   childRoutes: [
-    { path: 'default-page',
-      name: 'Default page',
+    { 
+      name: 'home',
       component: DefaultPage,
+      exact: false,
       isIndex: true,
+    },
+    {
+      path: ':abbr/:voteId?',
+      name: 'vote',
+      component: DefaultPage,
+      exact: false
     },
     { path: 'news', name: 'News', component: News },
     { path: 'why', name: 'Why', component: Why },

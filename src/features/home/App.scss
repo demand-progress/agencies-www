@@ -1,5 +1,6 @@
 @import '../../styles/mixins';
 
+
 .home-app {
   #main_nav{
     display: flex;
@@ -7,6 +8,12 @@
     align-items: center;
     padding: 15px 50px;
     background-color: $gray-light;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 2;
     ul{
       display: flex;
       padding: 0;
@@ -30,7 +37,7 @@
     }
   }
   .page-container{
-    padding-top: 70px;
+    padding-top: $navHeight + 70px;
     .wrap{
       max-width: 1000px;
       margin: 0 auto;

@@ -9,6 +9,15 @@
   * {
     // transition: all 0.3s linear;
   }
+  h3.agency{
+    font-size: 1.4em;
+    margin: 0;
+    span{
+      font-weight: normal;
+      font-size: 0.9rem;
+      color: $text-gray;
+    }
+  }
   a.header{
     color: $black;
     display: flex;
@@ -16,13 +25,20 @@
     padding: 25px 40px 25px 25px;
     background: url(../images/carrot-down.svg) right 25px center no-repeat;
     cursor: pointer;
-    h3{
-      font-size: 1.4em;
-      margin: 0;
-      span{
-        font-weight: normal;
-        font-size: 0.9rem;
+  }
+  .subtitle{
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    > div {
+      display: flex;
+      color: $purple;
+      font-weight: bold;
+      .label{
         color: $text-gray;
+        display: inline-block;
+        padding-right: 5px;
+        font-weight: normal;
       }
     }
   }
@@ -35,22 +51,6 @@
       overflow: hidden;
       padding: 0;
       margin: 0;
-    }
-    .subtitle{
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.85rem;
-      > div {
-        display: flex;
-        color: $purple;
-        font-weight: bold;
-        .label{
-          color: $text-gray;
-          display: inline-block;
-          padding-right: 5px;
-          font-weight: normal;
-        }
-      }
     }
     .desc{
       line-height: 1.4;
@@ -207,6 +207,11 @@
         &.pending{
           display: flex;
         }
+        &.expired{
+          .status{
+            background-position-y: 10px;
+          }
+        }
         .top{
           display: flex;
           justify-content: space-between;
@@ -236,5 +241,30 @@
         }
       }
     }
+  }
+}
+
+#modal{
+  position: fixed;
+  top: $navHeight;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - #{$navHeight});
+  z-index: 3;
+  background-color: rgba(255, 255, 255, 0.98);
+  box-sizing: border-box;
+  padding: 100px;
+  .close{
+    position: absolute;
+    right: 50px;
+    top: 30px;
+    background: url(../images/close.svg) center center no-repeat;
+    width: 40px;
+    height: 40px;
+    display: block;
+  }
+  .wrap{
+    max-width: 900px;
+    margin: auto;
   }
 }
