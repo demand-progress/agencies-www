@@ -10,19 +10,19 @@ export default class MemberVotes extends Component {
   static propTypes = {
     member: PropTypes.object.isRequired,
     onVoteHover: PropTypes.func,
-    abbr: PropTypes.string,
-    votes: PropTypes.array
+    agency: PropTypes.object
   }
   state = {
     activeVote: null
   }
   _votes() {
-    const { abbr, votes, member, onVoteHover, activeVote } = this.props
+    const { agency, member, onVoteHover, activeVote } = this.props
+    const { votes } = agency
     return <div className="votes">
       {(votes || []).map((v, i) => {
         const memberVote = v.member_votes[member.ref]
         return <Link
-            to={`/${abbr.toLowerCase()}/${v.id}`}
+            to={`/${agency.abbreviation.toLowerCase()}/${v.id}`}
             className={classNames('vote', memberVote, {
               bad: memberVote !== v.preferred_vote,
               good: memberVote === v.preferred_vote,
@@ -48,7 +48,8 @@ export default class MemberVotes extends Component {
   }
 
   render() {
-    const { activeVote, votes } = this.props
+    const { activeVote, agency } = this.props
+    const { votes } = agency
     let voteTitle
     if (activeVote !== null) {
       const vote = find(propEq('id', activeVote), votes)

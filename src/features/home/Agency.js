@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import moment from 'moment'
+import bindAllActions from '../common/redux/bindAllActions'
 import {
   MemberVotes,
   VoteDetail
@@ -19,21 +20,18 @@ class Agency extends Component {
   }
   state = {
     open: false,
-    votes: null,
     activeVote: null
   }
   componentDidUpdate(prevProps, prevState) {
-    const { agency } = this.props
-    const { open, votes } = this.state
+    const { actions, agency } = this.props
+    const { open } = this.state
     if (pathsChanged(prevState, this.state, ['open']) && 
       open &&
-      !votes) {
+      !agency.votes) {
       fetch(getApiUrl() + '/?members=' + join(',', pluck('ref', agency.members)))
         .then(res => res.json())
         .then(votes => {
-          this.setState({
-            votes
-          })
+          actions.setAgencyProp(agency.abbreviation, 'votes', votes)
         })
     }
   }
@@ -66,7 +64,8 @@ class Agency extends Component {
   }
   _member(member, i){
     const { agency } = this.props
-    const { activeVote, votes } = this.state
+    const { votes } = agency
+    const { activeVote } = this.state
     const fmt = 'M/D/YYYY'
     const termExpires = moment(member['term expires'], 'M/DD/YYYY')
     const mustVacate = moment(member['must vacate seat by'], 'M/DD/YYYY')
@@ -128,16 +127,15 @@ class Agency extends Component {
             })
           }}
           activeVote={activeVote}
-          abbr={agency.abbreviation}
+          agency={agency}
           member={member}
-          votes={votes}
         /> : null}
       </div>
     </div>
   }
   _vote() {
     const { match, agency } = this.props
-    const { votes } = this.state
+    const { votes } = agency 
     const { voteId, abbr } = match.params
     if (!voteId || abbr.toLowerCase() !== agency.abbreviation.toLowerCase() || !votes) {
       return null
@@ -177,4 +175,4 @@ class Agency extends Component {
   }
 }
 
-export default withRouter(Agency)
+export default withRouter(bindAllActions(Agency))

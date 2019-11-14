@@ -1,8 +1,10 @@
 import initialState from './initialState';
 import { reducer as fetchSheetsReducer } from './fetchSheets';
+import { reducer as setAgencyPropReducer } from './setAgencyProp';
 
 const reducers = [
   fetchSheetsReducer,
+  setAgencyPropReducer,
 ];
 
 export default function reducer(state = initialState, action) {
