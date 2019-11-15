@@ -17,19 +17,22 @@ export function setAgencyProp(abbr, prop, val) {
   }
 }
 
+
 export function reducer(state, action) {
   switch (action.type) {
     case HOME_SET_AGENCY_PROP:
+      const agencyMap = a => {
+        if (a.abbreviation === action.data.abbr) {
+          const ret = { ...a }
+          ret[action.data.prop] = action.data.val
+          return ret
+        }
+        return a
+      }
       return {
         ...state,
-        agencies: state.agencies.map(a => {
-          if (a.abbreviation === action.data.abbr) {
-            const ret = { ...a }
-            ret[action.data.prop] = action.data.val
-            return ret
-          }
-          return a
-        })
+        agencies: state.agencies.map(agencyMap),
+        filteredAgencies: state.filteredAgencies.map(agencyMap)
       }
 
     default:

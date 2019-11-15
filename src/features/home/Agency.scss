@@ -267,4 +267,33 @@
     max-width: 900px;
     margin: auto;
   }
+  .pagination{
+    border-top: 1px solid $gray-med;
+    margin-top: 30px;
+    padding-top: 0px;
+    h4{
+      color: $text-gray;
+      text-align: center;
+      font-size: 1.2rem;
+    }
+    .pages{
+      display: flex;
+      justify-content: space-between;
+      a {
+        padding: 15px 0px 15px 40px;
+        font-size: 0.9rem;;
+        display: block;
+        text-decoration: none;
+        width: 300px;
+        color: $text-dark;
+        background: url(../images/carrot-left.svg) left center no-repeat;
+        &.right{
+          text-align: right;
+          padding-left: 0;
+          padding-right: 40px;
+          background: url(../images/carrot-right.svg) right center no-repeat;
+        }
+      }
+    }
+  }
 }

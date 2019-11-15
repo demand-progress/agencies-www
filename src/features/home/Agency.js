@@ -11,8 +11,8 @@ import {
   withRouter,
   Link
 } from 'react-router-dom'
-import { VOTE_AGENCIES, pathsChanged, getApiUrl, agencySubtitle } from '../../common/lib'
-import { find, propEq, path, join, pluck } from 'ramda'
+import { VOTE_AGENCIES, pathsChanged, agencySubtitle } from '../../common/lib'
+import { findIndex, find, propEq, path, join, pluck } from 'ramda'
 
 class Agency extends Component {
   static propTypes = {
@@ -22,21 +22,8 @@ class Agency extends Component {
     open: false,
     activeVote: null
   }
-  componentDidUpdate(prevProps, prevState) {
-    const { actions, agency } = this.props
-    const { open } = this.state
-    if (pathsChanged(prevState, this.state, ['open']) && 
-      open &&
-      !agency.votes) {
-      fetch(getApiUrl() + '/?members=' + join(',', pluck('ref', agency.members)))
-        .then(res => res.json())
-        .then(votes => {
-          actions.setAgencyProp(agency.abbreviation, 'votes', votes)
-        })
-    }
-  }
   componentDidMount() {
-    const { agency } = this.props
+    const { actions, agency } = this.props
     const agencyAbbrev = path(['match', 'params', 'abbr'], this.props)
     if (agencyAbbrev && agency.abbreviation.toLowerCase() === agencyAbbrev.toLowerCase()) {
       this.setState({
@@ -134,19 +121,32 @@ class Agency extends Component {
     </div>
   }
   _vote() {
-    const { match, agency } = this.props
+    const { location, match, agency } = this.props
     const { votes } = agency 
     const { voteId, abbr } = match.params
     if (!voteId || abbr.toLowerCase() !== agency.abbreviation.toLowerCase() || !votes) {
       return null
     }
+    const voteI = findIndex(propEq('id', parseInt(voteId, 10)), votes)
+    const vote = votes[voteI]
+    let pagination
+    if (votes.length > 1) {
+      pagination = <div className="pagination">
+        <h4>View More Votes by the {agency.abbreviation}</h4>
+        <div className="pages">
+          {voteI > 0 ? <Link to={`/${abbr.toLowerCase()}/${votes[voteI - 1].id}`}>{votes[voteI - 1].title}</Link> : <div />}
+          {voteI < votes.length - 1 ? <Link className="right" to={`/${abbr.toLowerCase()}/${votes[voteI + 1].id}`}>{votes[voteI + 1].title}</Link> : <div />}
+        </div>
+      </div>
+    }
     return <div id="modal">
       <div className="wrap">
-        <Link to={`/${abbr.toLowerCase()}`} className="close"></Link>
+        <Link to={`/${abbr.toLowerCase()}${location.search}`} className="close"></Link>
         <VoteDetail 
           agency={agency}
-          vote={find(propEq('id', parseInt(voteId, 10)), votes)}
+          vote={vote}
         />
+        {pagination}
       </div>
     </div>
   }
@@ -162,7 +162,7 @@ class Agency extends Component {
         <div className="bottom">
           {agencySubtitle(agency)}
           <div className="desc">
-            Lorem ipsum dolor sit amet turducken shoulder hamburger brisket chuck ball tip turkey pork short ribs pig bresaola. Rump brisket tail, meatball chuck ham leberkas frankfurter sausage corned beef pork flank swine meatloaf andouille. Fatback capicola tongue sirloin, pork jerky pig chuck cow bresaola. 
+            {agency['agency description']}
           </div>
           {this._quorum()}
           <div className="members">

@@ -5,3 +5,4 @@ export { default as News } from './News';
 export { default as Why } from './Why';
 export { default as MemberVotes } from './MemberVotes';
 export { default as VoteDetail } from './VoteDetail';
+export { default as AgencyFilter } from './AgencyFilter';

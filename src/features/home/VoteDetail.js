@@ -12,7 +12,6 @@ export default class VoteDetail extends Component {
 
   render() {
     const { agency, vote } = this.props
-    console.log(vote);
     const outcomeGood = (vote.preferred_vote === 'nay' && vote.outcome === 'fail') || (vote.preferred_vote === 'yea' && vote.outcome === 'pass')
     return (
       <div className="home-vote-detail">

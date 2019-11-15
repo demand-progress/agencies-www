@@ -3,10 +3,11 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { find, propEq } from 'ramda'
 import { 
-  Link
+  Link,
+  withRouter
 } from 'react-router-dom'
 
-export default class MemberVotes extends Component {
+class MemberVotes extends Component {
   static propTypes = {
     member: PropTypes.object.isRequired,
     onVoteHover: PropTypes.func,
@@ -16,13 +17,13 @@ export default class MemberVotes extends Component {
     activeVote: null
   }
   _votes() {
-    const { agency, member, onVoteHover, activeVote } = this.props
+    const { location, agency, member, onVoteHover, activeVote } = this.props
     const { votes } = agency
     return <div className="votes">
       {(votes || []).map((v, i) => {
         const memberVote = v.member_votes[member.ref]
         return <Link
-            to={`/${agency.abbreviation.toLowerCase()}/${v.id}`}
+            to={`/${agency.abbreviation.toLowerCase()}/${v.id}${location.search}`}
             className={classNames('vote', memberVote, {
               bad: memberVote !== v.preferred_vote,
               good: memberVote === v.preferred_vote,
@@ -69,3 +70,5 @@ export default class MemberVotes extends Component {
     );
   }
 }
+
+export default withRouter(MemberVotes)

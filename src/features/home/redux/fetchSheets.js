@@ -5,11 +5,13 @@ import {
   HOME_FETCH_SHEETS_DISMISS_ERROR,
 } from './constants';
 import { propEq } from 'ramda'
+import bindAllActions from '../../common/redux/bindAllActions';
+import { filterAgencies } from '../../../common/lib';
 const GSheetReader = require('../../../common/lib/g-sheets-api')
 
 // Rekit uses redux-thunk for async actions by default: https://github.com/gaearon/redux-thunk
 // If you prefer redux-saga, you can use rekit-plugin-redux-saga: https://github.com/supnate/rekit-plugin-redux-saga
-export function fetchSheets(args = {}) {
+export function fetchSheets(search) {
   return (dispatch) => { // optionally you can have getState as the second argument
     dispatch({
       type: HOME_FETCH_SHEETS_BEGIN,
@@ -26,7 +28,8 @@ export function fetchSheets(args = {}) {
           console.log(agencies);
           dispatch({
             type: HOME_FETCH_SHEETS_SUCCESS,
-            data: agencies
+            data: agencies,
+            filteredAgencies: filterAgencies(agencies, search)
           })
           resolve(agencies)
         })
@@ -60,7 +63,8 @@ export function reducer(state, action) {
         ...state,
         fetchSheetsPending: false,
         fetchSheetsError: null,
-        agencies: action.data
+        agencies: action.data,
+        filteredAgencies: action.filteredAgencies
       };
 
     case HOME_FETCH_SHEETS_FAILURE:

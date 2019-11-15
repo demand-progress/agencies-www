@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import bindAllActions from '../common/redux/bindAllActions'
+import classNames from 'classnames'
 import {
-  Agency
+  Agency,
+  AgencyFilter
 } from './'
 import {
   WpContent
 } from '../common'
-import { propEq, flatten, pluck } from 'ramda'
+import { last, find, propEq, flatten, pluck } from 'ramda'
+import { VOTE_AGENCIES } from '../../common/lib';
 
 class DefaultPage extends Component {
   static propTypes = {
@@ -17,7 +20,7 @@ class DefaultPage extends Component {
   };
 
   render() {
-    const { agencies } = this.props.home
+    const { agencies, filteredAgencies } = this.props.home
     const members = flatten(pluck('members', agencies))
     const getStatus = status => {
       return members.filter(propEq('term status', status))
@@ -53,15 +56,37 @@ class DefaultPage extends Component {
               <h3>PENDING<br/>NOMINATIONS</h3>
             </div>
           </div>
-          {agencies.map(a => <Agency agency={a} key={a.abbreviation} />)}
+          <AgencyFilter />
+          {filteredAgencies.map(a => <Agency agency={a} key={a.abbreviation} />)}
         </div>
       </div>
-
     }
+    const voteAgencies = <div className="vote-agencies">
+      {VOTE_AGENCIES.map(abbr => {
+        let recentVote
+        if (agencies) {
+          const agency = find(propEq('abbreviation', abbr), agencies)
+          if (agency && agency.votes) {
+            const vote = last(agency.votes)
+            if (vote) {
+              recentVote = <Link className="recent" to={`/${abbr.toLowerCase()}/${vote.id}`}>{`${vote.title} - ${vote.vote_date}`}</Link>
+            }
+          }
+        }
+        return <div key={abbr} className={classNames("vote-agency", abbr.toLowerCase())}>
+          <Link 
+            to={`/?s=${abbr.toLowerCase()}`}
+            className="seal"
+            >{abbr}</Link>
+            {recentVote}
+        </div>
+      })}
+    </div>
     return (
       <div className="home-default-page">
         <div className="wrap">
           <WpContent id={2} />
+          {voteAgencies}
         </div>
         {agShow}
       </div>

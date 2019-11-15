@@ -1,10 +1,46 @@
 @import '../../styles/mixins';
 
 .home-default-page {
+  .vote-agencies{
+    display: flex;
+    .vote-agency{
+      flex: 1;
+      text-align: center;
+      .seal{
+        display: block;
+        background: url(../images/FTC-seal.png) top center no-repeat;
+        padding-top: 100px;
+        font-weight: bold;
+        color: $text-dark;
+        text-decoration: none;
+        margin-bottom: 10px;
+      }
+      &.fdic{
+        .seal{
+          background-image: url(../images/FDIC-seal.jpg);
+          background-size: 85px;
+        }
+      }
+      &.sec{
+        .seal{
+          background-image: url(../images/SEC-seal.png);
+        }
+      }
+      a.recent{
+        text-decoration: none;
+        color: $text-dark;
+        font-size: 0.9rem;
+        &:hover{
+          text-decoration: underline;
+        }
+      }
+    }
+  }
   .agencies{
     background-color: $gray-light;
     padding-top: 30px;
     margin-top: 30px;
+    padding-bottom: 70px;
     .common-wp-content{
       .content p{
         color: $text-gray;

@@ -1,0 +1,41 @@
+@import '../../styles/mixins';
+
+.home-agency-filter {
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #f0f0f0;
+  margin-bottom: 30px;
+  .top{
+    h4{
+      margin: 0;
+    }
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    a {
+      color: $text-dark;
+      text-decoration: none;
+      font-size: 0.8rem;
+    }
+  }
+  .bottom{
+    margin-top: 20px;
+    font-size: 0.85rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    input[type=text]{
+      border: none;
+      border-bottom: 1px solid $text-gray;
+      width: 300px;
+      color: $text-dark;
+      font-size: 0.9rem;
+      background: url(../images/magnifying-glass.svg) right center no-repeat transparent;
+      background-size: 15px;
+      &::placeholder{
+        color: $text-gray;
+        font-style: italic;
+      }
+    }
+  }
+}
