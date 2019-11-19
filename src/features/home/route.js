@@ -14,13 +14,13 @@ export default {
       exact: false,
       isIndex: true,
     },
+    { path: 'news', name: 'News', component: News },
+    { path: 'why', name: 'Why', component: Why },
     {
       path: ':abbr/:voteId?',
       name: 'vote',
       component: DefaultPage,
       exact: false
     },
-    { path: 'news', name: 'News', component: News },
-    { path: 'why', name: 'Why', component: Why },
   ],
 };
