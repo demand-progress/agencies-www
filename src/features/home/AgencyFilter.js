@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import bindAllActions from '../common/redux/bindAllActions'
 import { Link, withRouter } from 'react-router-dom'
-import { parse, stringify } from 'query-string'
+import { parse, stringify } from 'qs'
 import { uniq, identity, sortBy, length, map, lift, pluck, filter, pipe } from 'ramda'
 import { agencyExpireds, agenciesWithStatus } from '../../common/lib'
 
@@ -11,14 +11,14 @@ class AgencyFilter extends Component {
   }
   _pushQuery(queryObj) {
     const { history, location } = this.props
-    const go = location.pathname + '?' + stringify(Object.assign(parse(location.search), queryObj)) 
+    const go = location.pathname + '?' + stringify(Object.assign(parse(location.search.replace('?', '')), queryObj), { encode: false }) 
     this.props.history.push(go)
   }
 
   render() {
     const { home, location, history } = this.props
     const { agencies } = home
-    const queries = parse(location.search)
+    const queries = parse(location.search.replace('?', ''))
     const countAndSort = pipe(
       map(length),
       uniq,
@@ -78,7 +78,7 @@ class AgencyFilter extends Component {
           <label>
             Committee of Jurisdiction:&nbsp;&nbsp;
             <select
-              value={queries.committee}
+              value={queries.committee || ''}
               onChange={evt => {
                 this._pushQuery({
                   committee: evt.target.value
@@ -92,7 +92,7 @@ class AgencyFilter extends Component {
           <label>
             # of Expired Seats:&nbsp;&nbsp;
             <select
-              value={queries.expireds}
+              value={queries.expireds || ''}
               onChange={evt => {
                 this._pushQuery({
                   expireds: evt.target.value
@@ -106,7 +106,7 @@ class AgencyFilter extends Component {
           <label>
             # of Vacant Seats:&nbsp;&nbsp;
             <select
-              value={queries.vacant}
+              value={queries.vacant || ''}
               onChange={evt => {
                 this._pushQuery({
                   vacant: evt.target.value

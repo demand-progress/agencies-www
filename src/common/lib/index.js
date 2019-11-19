@@ -1,6 +1,6 @@
 import { length, pipe, pluck, lift, filter, curry, find, path } from 'ramda'
 import React from 'react'
-import { parse } from 'query-string'
+import { parse } from 'qs'
 
 export const VOTE_AGENCIES = ['FDIC', 'FTC', 'SEC']
 
@@ -41,7 +41,7 @@ export const agenciesWithStatus = status => {
 }
 
 export const filterAgencies = (agencies = [], search) => {
-  const parsedSearch = parse(search)
+  const parsedSearch = parse(search.replace('?', ''))
   return agencies.filter(a => {
     let ok = true
     if (parsedSearch.s) {
