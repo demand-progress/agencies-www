@@ -69,7 +69,7 @@ class Agency extends Component {
         term = `Term Expires ${termExpires.format(fmt)}`
       }
       if (lastAction.isValid()) {
-        leftDetails = `Appointed ${lastAction.format(fmt)}`
+        leftDetails = `Confirmed ${lastAction.format(fmt)}`
         if (dateReceived.isValid()) {
           leftDetails += ` after ${parseInt(moment.duration(lastAction.diff(dateReceived)).asDays(), 10)} days pending`
         }

@@ -4,7 +4,8 @@ import {
   HOME_FETCH_SHEETS_FAILURE,
   HOME_FETCH_SHEETS_DISMISS_ERROR,
 } from './constants';
-import { propEq } from 'ramda'
+import { find, propEq } from 'ramda'
+import moment from 'moment'
 import bindAllActions from '../../common/redux/bindAllActions';
 import { filterAgencies } from '../../../common/lib';
 const GSheetReader = require('../../../common/lib/g-sheets-api')
@@ -22,8 +23,16 @@ export function fetchSheets(search) {
       // const doc = '1hH0Z-OWfEoMrhqQYtfO46nPfA2JXl34ooD_QeB1-40s'
       GSheetReader({ sheetId: `${doc}/2` }, agencies => {
         GSheetReader({ sheetId: `${doc}/1` }, members => {
+          // console.log(members.filter(m => m.abbreviation && !find(propEq('abbreviation', m.abbreviation), agencies)));
+          members = members.map(member => {
+            const termExpires = moment(member['term expires'], 'M/DD/YYYY').endOf('day')
+            if (Date.now() > termExpires.valueOf()) {
+              member['term status'] = 'Expired'
+            }
+            return member
+          })
           agencies.forEach(ag => {
-            ag.members = members.filter(propEq('agency', ag.agency))
+            ag.members = members.filter(propEq('abbreviation', ag.abbreviation))
           })
           console.log(agencies);
           dispatch({
