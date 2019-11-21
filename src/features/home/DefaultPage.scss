@@ -1,6 +1,47 @@
 @import '../../styles/mixins';
 
 .home-default-page {
+  .legend{
+    display: flex;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    > div {
+      display: flex;
+      align-items: center;
+      $h: 11px;
+      $w: 15px;
+      $b: 3px;
+      .box{
+        width: $w;
+        height: $h;
+        background-color: $blue-light;
+        border: $b solid $blue;
+        margin-right: 5px;
+      }
+      &.rep .box{
+        background-color: $red-light;
+        border-color: $red;
+      }
+      &.np .box{
+        background-color: $gray-med;
+        border-color: $black;
+      }
+      &.vac .box{
+        background-color: transparent;
+        border-color: $black;
+      }
+      &.pend .box{
+        border-color: transparent;
+        background: url(../images/diagonal-lines.svg) center center repeat $gray-med;
+      }
+      &.exp .box{
+        border-color: transparent;
+        background: url(../images/expired-whiteX.svg) center center no-repeat $gray-med;
+      }
+    }
+  }
   .vote-agencies{
     display: flex;
     .vote-agency{

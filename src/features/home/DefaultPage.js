@@ -57,6 +57,33 @@ class DefaultPage extends Component {
             </div>
           </div>
           <AgencyFilter />
+          <div className="legend">
+            <div>Legend:</div>
+            <div className="dem">
+              <div className="box"></div>
+              Democratic Seat
+            </div>
+            <div className="rep">
+              <div className="box"></div>
+              Republican Seat
+            </div>
+            <div className="np">
+              <div className="box"></div>
+              Non-Partisan Seat
+            </div>
+            <div className="exp">
+              <div className="box"></div>
+              Expired Seat
+            </div>
+            <div className="pend">
+              <div className="box"></div>
+              Pending Seat
+            </div>
+            <div className="vac">
+              <div className="box"></div>
+              Vacant Seat
+            </div>
+          </div>
           {filteredAgencies.map(a => <Agency agency={a} key={a.abbreviation} />)}
         </div>
       </div>
