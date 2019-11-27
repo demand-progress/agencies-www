@@ -5,6 +5,7 @@ import { withRouter, Link } from 'react-router-dom'
 import { VOTE_AGENCIES, getApiUrl } from '../../common/lib';
 import { find, propEq, join, pluck } from 'ramda'
 import moment from 'moment'
+import classNames from 'classnames'
 /*
   This is the root component of your app. Here you define the overall layout
   and the container of the react router.
@@ -37,16 +38,16 @@ class App extends Component {
   }
 
   render() {
+    const { location } = this.props
     return (
       <div className="home-app">
         <nav id="main_nav">
-          <Link to="/">
-            <img src="http://placekitten.com/400/80"/>
+          <Link to="/" className="logo">
           </Link>
           <ul>
-            <li><Link to="/">Tracker</Link></li>
-            <li><Link to="/why">Why?</Link></li>
-            <li><Link to="/news">News</Link></li>
+            <li><Link className={classNames({ active: location.pathname === '/' })} to="/">Tracker</Link></li>
+            <li><Link className={classNames({ active: location.pathname === '/news' })} to="/news">News</Link></li>
+            <li><Link className={classNames({ active: location.pathname === '/about' })} to="/about">About</Link></li>
           </ul>
         </nav>
         <div className="page-container">{this.props.children}</div>

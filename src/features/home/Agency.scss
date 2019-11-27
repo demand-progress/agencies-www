@@ -9,6 +9,11 @@
   * {
     // transition: all 0.3s linear;
   }
+  .legend{
+    padding-left: 65px;
+    color: $text-gray;
+    font-size: 0.85rem;
+  }
   h3.agency{
     font-size: 1.4em;
     margin: 0;
@@ -25,6 +30,9 @@
     padding: 25px 40px 25px 25px;
     background: url(../images/carrot-down.svg) right 25px center no-repeat;
     cursor: pointer;
+    &:hover{
+      text-decoration: none;
+    }
   }
   .subtitle{
     display: flex;
@@ -44,7 +52,9 @@
   }
   // closed
   > .bottom {
+
     .subtitle,
+    .legend,
     .desc,
     .quorum{
       max-height: 0;
@@ -146,13 +156,23 @@
     }
     > .bottom{
       .subtitle,
+      .legend,
       .desc,
       .quorum{
         max-height: 500px;
       }
+      .legend{
+        margin-top: 15px;
+        margin-bottom: 15px;
+        padding-left: 65px;
+      }
     }
     > .bottom{
       padding: 0px 25px 25px 25px;
+      .right{
+        text-align: right;
+      }
+
     }
     .subtitle{
       padding-top: 10px;
@@ -251,9 +271,10 @@
   width: 100%;
   height: calc(100vh - #{$navHeight});
   z-index: 3;
-  background-color: rgba(255, 255, 255, 0.98);
+  background-color: rgba(255, 255, 255, 1);
   box-sizing: border-box;
   padding: 100px;
+  overflow-x: auto;
   .close{
     position: absolute;
     right: 50px;
@@ -292,6 +313,41 @@
           padding-left: 0;
           padding-right: 40px;
           background: url(../images/carrot-right.svg) right center no-repeat;
+        }
+      }
+    }
+  }
+}
+@media (max-width: $tablet-max) {
+  .home-agency {
+    h3.agency{
+      width: 50%;
+    }
+    .subtitle > div {
+      flex-direction: column;
+      align-items: center;
+    }
+    > .bottom{
+      .members{
+        flex-wrap: wrap;
+        width: 40%;
+        justify-content: flex-end;
+        .member{
+          margin-bottom: 5px;
+        }
+      }
+    }
+    &.open{
+      h3.agency{
+        width: 100%;
+      }
+      > .bottom{
+        .legend{
+          padding-left: 0;
+        }
+        .members{
+          flex-wrap: nowrap;
+          width: 100%;
         }
       }
     }

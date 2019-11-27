@@ -14,6 +14,20 @@ import {
 import { VOTE_AGENCIES, pathsChanged, agencySubtitle } from '../../common/lib'
 import { findIndex, find, propEq, path, join, pluck } from 'ramda'
 
+const PRESIDENTS = [{
+  start: '1-20-1993',
+  name: 'Bill Clinton'
+},{
+  start: '1-20-2001',
+  name: 'George W Bush'
+},{
+  start: '1-20-2009',
+  name: 'Barrack Obama'
+},{
+  start: '1-20-2017',
+  name: 'Donald Trump'
+}].reverse()
+
 class Agency extends Component {
   static propTypes = {
     agency: PropTypes.object
@@ -61,7 +75,13 @@ class Agency extends Component {
     let status = member['term status'].toLowerCase()
     const party = (member['political party'] || '').toLowerCase()
     let name = member.name
-    let term, termAlert, leftDetails, rightDetails
+    let term, termAlert, leftDetails = '', rightDetails, nominatedBy
+    if (status !== 'vacant') {
+      const nextPresI = findIndex(pres => moment(pres.start, 'M-DD-YYYY').valueOf() < dateReceived.valueOf(), PRESIDENTS)
+      if (nextPresI > -1) {
+        nominatedBy = `Nominated by ${PRESIDENTS[nextPresI].name}`
+      }
+    }
     if (termExpires.isValid()) {
       if (termExpires.valueOf() < Date.now()) {
         term = `Term Expired ${termExpires.fromNow()}`
@@ -69,7 +89,10 @@ class Agency extends Component {
         term = `Term Expires ${termExpires.format(fmt)}`
       }
       if (lastAction.isValid()) {
-        leftDetails = `Confirmed ${lastAction.format(fmt)}`
+        if (nominatedBy) {
+          leftDetails += nominatedBy + ', '
+        }
+        leftDetails += `Confirmed ${lastAction.format(fmt)}`
         if (dateReceived.isValid()) {
           leftDetails += ` after ${parseInt(moment.duration(lastAction.diff(dateReceived)).asDays(), 10)} days pending`
         }
@@ -79,8 +102,19 @@ class Agency extends Component {
       rightDetails = 'Must Vacate by ' + mustVacate.format(fmt)
     }
     if (status === 'pending') {
-      name = 'Pending: ' + name
-      leftDetails = ''
+      if (member['replacing'] === name) {
+        name = 'Pending Reappointment: ' + name
+      } else {
+        name = 'Pending: ' + name
+      }
+      if (nominatedBy) {
+        leftDetails = nominatedBy
+      } else {
+        leftDetails = ''
+      }
+      if (member['replacing'] !== name) {
+        leftDetails += ' to replace ' + member['replacing']
+      }
       if (dateReceived.isValid()) {
         term = `Nominated ${dateReceived.fromNow()}`
       }
@@ -150,6 +184,31 @@ class Agency extends Component {
       </div>
     </div>
   }
+  _legend() {
+    const { agency } = this.props
+    const { votes } = agency
+    if (!votes) {
+      return null
+    }
+    return <div className="legend">
+            <div className="good">
+              <div className="box"></div>
+              Voted with Agency Spotlight principles
+            </div>
+            <div className="rep">
+              <div className="box"></div>
+              Voted against Agency Spotlight principles
+            </div>
+            <div className="nv">
+              <div className="box"></div>
+              Did Not Vote
+            </div>
+            <div className="inel">
+              <div className="box"></div>
+              Ineligible
+            </div>
+    </div>
+  }
 
   render() {
     const { open } = this.state
@@ -165,6 +224,7 @@ class Agency extends Component {
             {agency['agency description']}
           </div>
           {this._quorum()}
+          {this._legend()}
           <div className="members">
             {agency.members.map(this._member.bind(this))}
           </div>

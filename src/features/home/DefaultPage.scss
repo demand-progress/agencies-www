@@ -1,6 +1,17 @@
 @import '../../styles/mixins';
 
 .home-default-page {
+  .common-wp-content{
+    text-align: center;
+  }
+  #content_2{
+    p{
+      color: $text-gray;
+    }
+    h3{
+      margin-top: 70px;
+    }
+  }
   .legend{
     display: flex;
     padding-top: 20px;
@@ -32,6 +43,18 @@
         background-color: transparent;
         border-color: $black;
       }
+      &.good .box{
+        background-color: $green;
+        border-color: $green-dark;
+      }
+      &.nv .box{
+        background-color: $white;
+        border-color: $gray;
+      }
+      &.inel .box{
+        background-color: $gray-med;
+        border-color: $gray;
+      }
       &.pend .box{
         border-color: transparent;
         background: url(../images/diagonal-lines.svg) center center repeat $gray-med;
@@ -47,9 +70,11 @@
     .vote-agency{
       flex: 1;
       text-align: center;
+      padding: 0 20px;
       .seal{
         display: block;
-        background: url(../images/FTC-seal.png) top center no-repeat;
+        background: url(../images/FTC-seal.svg) top center no-repeat;
+        background-size: 85px;
         padding-top: 100px;
         font-weight: bold;
         color: $text-dark;
@@ -59,7 +84,6 @@
       &.fdic{
         .seal{
           background-image: url(../images/FDIC-seal.jpg);
-          background-size: 85px;
         }
       }
       &.sec{
@@ -68,9 +92,7 @@
         }
       }
       a.recent{
-        text-decoration: none;
-        color: $text-dark;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         &:hover{
           text-decoration: underline;
         }
@@ -79,7 +101,7 @@
   }
   .agencies{
     background-color: $gray-light;
-    padding-top: 30px;
+    padding-top: 50px;
     margin-top: 30px;
     padding-bottom: 70px;
     .common-wp-content{
@@ -89,8 +111,8 @@
     }
     .stats{
       display: flex;
-      margin-bottom: 25px;
-      margin-top: 25px;
+      margin-bottom: 50px;
+      margin-top: 30px;
       .stat{
         flex-grow: 1;
         flex-shrink: 1;
@@ -99,7 +121,7 @@
         .num{
           color: $purple;
           font-size: 50px;
-          font-weight: bold;
+          font-weight: 700;
         }
         h3{
           margin-top: 10px;
@@ -115,6 +137,19 @@
           .rep{
             color: $red;
           }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: $tablet-max) {
+  .home-default-page {
+    .legend{
+      > div {
+        flex-direction: column;
+        .box{
+          margin-bottom: 7px;
         }
       }
     }

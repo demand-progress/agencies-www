@@ -2,18 +2,36 @@
 
 
 .home-app {
+  a{
+    color: $purple;
+    text-decoration: none;
+    &:hover,
+    &:active{
+      color: $purple;
+      text-decoration: underline;
+    }
+  }
+
   #main_nav{
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 15px 50px;
-    background-color: $gray-light;
+    align-items: flex-end;
+    padding: 10px 50px 20px;
+    border-bottom: 1px solid $gray-med;
+    background-color: $white;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     box-sizing: border-box;
     z-index: 2;
+    a.logo{
+      background: url(../images/agency-spotlight-logo.svg) center -16px no-repeat;
+      height: 100px;
+      background-size: auto 150%;
+      display: inline-block;
+      width: 400px;
+    }
     ul{
       display: flex;
       padding: 0;
@@ -23,24 +41,45 @@
         padding: 0;
         margin: 0;
         a{
+          font-weight: 900;
+          font-size: 1.1rem;;
           display: inline-block;
           padding: 0 20px;
-          text-decoration: none;
-          color: $text-dark;
           text-transform: uppercase;
+          color: $text-dark;
           &.active,
           &:hover{
-            font-weight: bold;
+            color: $purple;
+            text-decoration: none;
           }
         }
       }
     }
   }
   .page-container{
-    padding-top: $navHeight + 70px;
+    padding-top: $navHeight + 90px;
     .wrap{
       max-width: 1000px;
       margin: 0 auto;
+    }
+  }
+}
+
+@media (max-width: $tablet-max) {
+  .home-app{
+    #main_nav{
+      padding-left: 25px;
+      padding-right: 25px;
+      a.logo{
+        width: 210px;
+      }
+    }
+    .page-container{
+      .wrap{
+        max-width: 100%;
+        margin: 0 25px;
+      }
+
     }
   }
 }

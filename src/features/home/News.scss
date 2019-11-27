@@ -1,5 +1,33 @@
 @import '../../styles/mixins';
 
 .home-news {
+  .meta{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .tags{
+      font-weight: bold;
+    }
+    .date{
+      color: $text-gray;
+    }
+  }
+  .post{
+    border-bottom: 1px solid $gray-med;
+    padding-bottom: 40px;
+    h2{
+      margin-top: 0;
+    }
+    .content{
+      color: darken($text-gray, 15%);
+    }
+    .fr{
+      display: flex;
+      justify-content: flex-end;
+    }
+    a.btn{
+      display: inline-block;
+    }
+  }
 
 }

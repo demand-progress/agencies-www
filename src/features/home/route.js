@@ -15,7 +15,7 @@ export default {
       isIndex: true,
     },
     { path: 'news', name: 'News', component: News },
-    { path: 'why', name: 'Why', component: Why },
+    { path: 'about', name: 'About', component: Why },
     {
       path: ':abbr/:voteId?',
       name: 'vote',

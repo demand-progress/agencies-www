@@ -15,7 +15,9 @@ $green-dark: #3a772d;
 $text-dark: $black;
 $text-gray: $gray;
 
-$navHeight: 114px;
+$navHeight: 131px;
+$tablet-max: 1229px;
+$phone-max: 767px;
 
 p{
   line-height: 1.6;
@@ -23,6 +25,33 @@ p{
   margin-bottom: 1.5rem;
   &.ntm{
     margin-top: 0;
+  }
+}
+.comma-list {
+  display: inline;
+  list-style: none;
+  padding: 0px;
+  li {
+    display: inline;
+    &::after{
+      content:  ", ";
+    }
+    &:last-child::after{
+      content: "";
+    }
+  }
+}
+a.btn{
+  padding: 7px 35px;
+  background-color: $purple;
+  color: $white;
+  font-size: 0.9rem;
+  border: 1px solid transparent;
+  &:hover{
+    background-color: $white;
+    border-color: $purple;
+    color: $purple;
+    text-decoration: none;
   }
 }
 .block{
