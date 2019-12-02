@@ -72,5 +72,26 @@
     }
 
   }
-
+}
+@media (max-width: $phone-max){
+  .home-vote-detail{
+    .subtitle{
+      flex-wrap: wrap;
+      margin-bottom: 0 !important;
+      > div{
+        width: 100%;
+        margin-bottom: 10px;
+        align-items: flex-start;
+      }
+    }
+    h3.key{
+      margin-top: 30px;
+    }
+    .position{
+      flex-direction: column;
+      > *{
+        margin-bottom: 10px;
+      }
+    }
+  }
 }

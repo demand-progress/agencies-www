@@ -58,7 +58,7 @@ class DefaultPage extends Component {
           </div>
           <AgencyFilter />
           <div className="legend">
-            <div>Legend:</div>
+            <div className="label">Legend:</div>
             <div className="dem">
               <div className="box"></div>
               Democratic Seat

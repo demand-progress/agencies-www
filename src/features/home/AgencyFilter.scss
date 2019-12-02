@@ -39,3 +39,19 @@
     }
   }
 }
+
+@media (max-width: $phone-max) {
+  .home-agency-filter{
+    .bottom{
+      flex-wrap: wrap;
+      > div{
+        flex-grow: 1;
+      }
+      input[type=text]{
+        font-size: 1.1rem;
+        margin-top: 10px;
+        width: 100%;
+      }
+    }
+  }
+}
