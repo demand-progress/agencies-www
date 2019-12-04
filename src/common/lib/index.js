@@ -5,7 +5,7 @@ import { parse } from 'qs'
 export const VOTE_AGENCIES = ['FDIC', 'FTC', 'SEC']
 
 export const getApiUrl = () => {
-  return false && /localhost/.test(window.location.href) ? 'http://localhost:8888/agencies/' : 'http://api.demandprogressaction.org'
+  return false && /localhost/.test(window.location.href) ? 'http://localhost:8888/agencies/' : '//api.demandprogressaction.org'
 }
 
 export const pathsChanged = curry((props, nextProps, arrayOfPaths) => {
