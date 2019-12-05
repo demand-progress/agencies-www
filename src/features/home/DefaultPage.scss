@@ -1,7 +1,8 @@
 @import '../../styles/mixins';
 
 .home-default-page {
-  .common-wp-content{
+  #content_40,
+  #content_2 {
     text-align: center;
   }
   #content_2{
@@ -140,6 +141,9 @@
         }
       }
     }
+  }
+  #content_189{
+    padding-top: 20px;
   }
 }
 

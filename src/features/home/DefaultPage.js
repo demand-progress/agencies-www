@@ -85,6 +85,7 @@ class DefaultPage extends Component {
             </div>
           </div>
           {filteredAgencies.map(a => <Agency agency={a} key={a.abbreviation} />)}
+          <WpContent id={189} />
         </div>
       </div>
     }

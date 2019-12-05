@@ -54,7 +54,7 @@ export default class WpPostsList extends Component {
                 </ul>
                 <div className="date">{moment(p.date).format('M.D.YY')}</div>
               </div>
-              <h2>{p.title.rendered}</h2>
+              <h2 dangerouslySetInnerHTML={{ __html: p.title.rendered }}></h2>
               <div className="content" dangerouslySetInnerHTML={{ __html: p.content.rendered }}></div>
               {readMore}
             </div>
