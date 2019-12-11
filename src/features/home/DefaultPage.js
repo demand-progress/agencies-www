@@ -28,6 +28,7 @@ class DefaultPage extends Component {
     let agShow
     const vacants = getStatus('Vacant')
     const expireds = getStatus('Expired')
+    const pendings = getStatus('Pending')
     if (agencies.length > 0) {
       agShow = <div className="agencies">
         <div className="wrap">
@@ -54,6 +55,11 @@ class DefaultPage extends Component {
             <div className="stat">
               <div className="num">{getStatus('Pending').length}</div>
               <h3>PENDING<br/>NOMINATIONS</h3>
+              <div className="party">
+                <span className="dem">{pendings.filter(propEq('political party', 'Democrat')).length} Democrat,</span>
+                <span className="rep"> {pendings.filter(propEq('political party', 'Republican')).length} Republican,</span>
+                <span className="np"><br/>{pendings.filter(propEq('political party', 'N/A')).length} Non Partisan</span>
+              </div>
             </div>
           </div>
           <AgencyFilter />
@@ -118,8 +124,10 @@ class DefaultPage extends Component {
     return (
       <div className="home-default-page">
         <div className="wrap">
-          <WpContent id={2} />
-          {voteAgencies}
+          <div className="top-wrap">
+            <WpContent id={2} />
+            {voteAgencies}
+          </div>
         </div>
         {agShow}
       </div>

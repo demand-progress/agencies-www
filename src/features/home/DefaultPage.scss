@@ -1,11 +1,15 @@
 @import '../../styles/mixins';
 
 .home-default-page {
+  .top-wrap{
+    padding: 0 100px;
+  }
   #content_40,
   #content_2 {
     text-align: center;
   }
   #content_2{
+    margin-bottom: 40px;
     p{
       color: $text-gray;
     }
@@ -169,6 +173,9 @@
 }
 @media (max-width: $phone-max) {
   .home-default-page{
+    .top-wrap{
+      padding: 0;
+    }
     .vote-agencies{
       flex-direction: column;
       .vote-agency{
@@ -188,9 +195,13 @@
       > div{
         width: 50%;
         margin-bottom: 10px;
+        flex-direction: row;
         &.label{
           font-weight: bold;
           width: 100%;
+        }
+        .box{
+          margin-bottom: 0;
         }
       }
       flex-wrap: wrap;

@@ -47,20 +47,22 @@ class AgencyFilter extends Component {
           </div>
         </div>
         <div className="bottom">
-          <label>
-            <input type="checkbox" checked={queries.tracker || false} onChange={evt => {
-              this._pushQuery({
-                tracker: evt.target.checked ? '1' : ''
-              })
-            }}  /> With Voting Record
-          </label>
-          <label>
-            <input type="checkbox" checked={queries.noQuorum || false} onChange={evt => {
-              this._pushQuery({
-                noQuorum: evt.target.checked ? '1' : ''
-              })
-            }}  /> Without Quorum
-          </label>
+          <div>
+            <label>
+              <input type="checkbox" checked={queries.tracker || false} onChange={evt => {
+                this._pushQuery({
+                  tracker: evt.target.checked ? '1' : ''
+                })
+              }}  /> With Voting Record
+            </label>
+            <label className="ml">
+              <input type="checkbox" checked={queries.noQuorum || false} onChange={evt => {
+                this._pushQuery({
+                  noQuorum: evt.target.checked ? '1' : ''
+                })
+              }}  /> Without Quorum
+            </label>
+          </div>
           <div>
             <input 
               type="text"  

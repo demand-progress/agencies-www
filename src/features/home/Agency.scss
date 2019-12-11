@@ -226,6 +226,9 @@
         }
         &.pending{
           display: flex;
+          &:first-of-type{
+            margin-top: 20px;
+          }
         }
         &.expired{
           .status{
@@ -376,10 +379,19 @@
       margin-bottom: 10px;
     }
     > .bottom .members{
+      justify-content: flex-start;
       right: 15px;
       bottom: 15px;
       top: auto;
       width: 88%;
+    }
+    .legend{
+      > div {
+        width: 100%;
+        .box{
+          margin-right: 7px;
+        }
+      }
     }
     &.open{
       > .bottom{
@@ -411,6 +423,9 @@
               .name{
                 margin-bottom: 5px;
               }
+              .term{
+                text-align: left;
+              }
             }
             .bottom{
               flex-wrap: wrap;
@@ -423,5 +438,10 @@
         }
       }
     }
+  }
+}
+@media (max-width: $super-small){
+  .home-agency{
+    min-height: 212px;
   }
 }

@@ -6,3 +6,18 @@
     align-items: center;
   }
 }
+
+@media (max-width: $phone-max){
+  .home-why{
+    .wp-block-group__inner-container{
+      flex-direction: column;
+      figure{
+        margin: 0;
+        img{
+          max-width: 100%;
+          height: auto;
+        }
+      }
+    }
+  }
+}
