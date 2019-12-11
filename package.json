@@ -47,6 +47,7 @@
     "ramda": "^0.26.1",
     "react": "^16.2.0",
     "react-dev-utils": "^5.0.0",
+    "react-device-detect": "^1.11.14",
     "react-dom": "^16.2.0",
     "react-hot-loader": "^4.0.0",
     "react-redux": "^5.0.7",

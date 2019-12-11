@@ -34,7 +34,9 @@ class Agency extends Component {
   }
   state = {
     open: false,
-    activeVote: null
+    activeVote: null,
+    lastPath: '',
+    jumpedTo: false
   }
   componentDidMount() {
     const { actions, agency } = this.props
@@ -43,6 +45,26 @@ class Agency extends Component {
       this.setState({
         open: true
       })
+    }
+  }
+  componentDidUpdate() {
+    const { lastPath, jumpedTo } = this.state
+    const { agency } = this.props
+    const { pathname } = this.props.location
+    if (lastPath !== pathname) {
+      const regex = new RegExp('^/' + agency.abbreviation, 'i')
+      const st8 = {
+        lastPath: pathname
+      }
+      if (regex.test(pathname)) {
+        if (!jumpedTo) {
+          window.scrollTo(0, this.ref.offsetTop - 200)
+          st8.jumpedTo = true
+        }
+      } else {
+        st8.jumpedTo = false
+      }
+      this.setState(st8)
     }
   }
   _quorum() {
@@ -101,7 +123,9 @@ class Agency extends Component {
     if (mustVacate.isValid()) {
       rightDetails = 'Must Vacate by ' + mustVacate.format(fmt)
     }
+    let position = <span className="position">{member.position}</span>
     if (status === 'pending') {
+      position = ''
       if (member['replacing'] === name) {
         name = 'Pending Reappointment: ' + name
       } else {
@@ -112,7 +136,7 @@ class Agency extends Component {
       } else {
         leftDetails = ''
       }
-      if (member['replacing'] !== name) {
+      if (member['replacing'] !== member.name) {
         leftDetails += ' to replace ' + member['replacing']
       }
       if (dateReceived.isValid()) {
@@ -127,7 +151,7 @@ class Agency extends Component {
       <div className="info">
         <div className="top">
           <div className="name">
-            {name} <span className="position">{member.position}</span>
+            {name} {position} 
           </div>
           <div className="term">
             {term}
@@ -147,7 +171,7 @@ class Agency extends Component {
               activeVote: voteI
             })
           }}
-          activeVote={activeVote}
+          activeVote={activeVote || (agency.votes ? agency.votes[agency.votes.length - 1].id : null)}
           agency={agency}
           member={member}
         /> : null}
@@ -214,7 +238,7 @@ class Agency extends Component {
     const { open } = this.state
     const { agency } = this.props
     return (
-      <div className={classNames("home-agency", { open })}>
+      <div ref={ref => this.ref = ref} className={classNames("home-agency", { open })} id={agency.abbreviation}>
         <a className="header" onClick={() => this.setState({ open: !open })}>
           <h3 className="agency">{agency.agency} <span>({agency.abbreviation})</span></h3>
         </a>

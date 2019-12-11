@@ -2,10 +2,14 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { find, propEq } from 'ramda'
+import {
+  isMobile
+} from 'react-device-detect'
 import { 
   Link,
   withRouter
 } from 'react-router-dom'
+
 
 class MemberVotes extends Component {
   static propTypes = {
@@ -17,18 +21,37 @@ class MemberVotes extends Component {
     activeVote: null
   }
   _votes() {
-    const { location, agency, member, onVoteHover, activeVote } = this.props
+    const { history, location, agency, member, onVoteHover, activeVote } = this.props
     const { votes } = agency
     return <div className="votes">
       {(votes || []).map((v, i) => {
-        const memberVote = v.member_votes[member.ref]
+        let memberVote = v.member_votes[member.ref]
+        if (!memberVote) {
+          memberVote = 'ineligible'
+        }
+        const cls = classNames('vote', memberVote, {
+          bad: memberVote !== v.preferred_vote,
+          good: memberVote === v.preferred_vote,
+          active: activeVote === v.id
+        })
+        const to = `/${agency.abbreviation.toLowerCase()}/${v.id}${location.search}`
+        if (isMobile) {
+          return <a onClick={() => {
+            if (activeVote === v.id) {
+              history.push(to)
+            } else {
+              if (onVoteHover) {
+                onVoteHover(v.id)
+              }
+            }
+          }} className={cls}>
+            <div className="block" />
+            <span className="vote-label">{memberVote}</span>
+          </a>
+        }
         return <Link
-            to={`/${agency.abbreviation.toLowerCase()}/${v.id}${location.search}`}
-            className={classNames('vote', memberVote, {
-              bad: memberVote !== v.preferred_vote,
-              good: memberVote === v.preferred_vote,
-              active: activeVote === v.id
-            })} 
+            to={to}
+            className={cls} 
             key={i}
             onMouseLeave={() => {
               if (onVoteHover) {
@@ -49,15 +72,16 @@ class MemberVotes extends Component {
   }
 
   render() {
-    const { activeVote, agency } = this.props
+    const { member, activeVote, agency, location } = this.props
     const { votes } = agency
+    if (member['term status'].toLowerCase() === 'vacant') return <div />
     let voteTitle
     if (activeVote !== null) {
       const vote = find(propEq('id', activeVote), votes)
-      voteTitle = <span>
-        &nbsp;{vote.title}
-        <small> (click for more info)</small>
-      </span>
+      voteTitle = <Link to={`/${agency.abbreviation.toLowerCase()}/${vote.id}${location.search}`}>
+        <span className="sp">&nbsp;</span>{vote.title}
+        <small> {isMobile ? '(tap box twice for more info)' : '(click box for more info)'}</small>
+      </Link>
     }
     return (
       <div className="home-member-votes">

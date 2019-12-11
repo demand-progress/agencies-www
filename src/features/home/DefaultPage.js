@@ -92,18 +92,23 @@ class DefaultPage extends Component {
     const voteAgencies = <div className="vote-agencies">
       {VOTE_AGENCIES.map(abbr => {
         let recentVote
+        let search = abbr.toLowerCase()
         if (agencies) {
           const agency = find(propEq('abbreviation', abbr), agencies)
           if (agency && agency.votes) {
+            search = agency.agency.toLowerCase()
             const vote = last(agency.votes)
             if (vote) {
-              recentVote = <Link className="recent" to={`/${abbr.toLowerCase()}/${vote.id}`}>{`${vote.title} - ${vote.vote_date}`}</Link>
+              recentVote = <div>
+                <h5>Recent Key Vote:</h5>
+                <Link className="recent" to={`/${abbr.toLowerCase()}/${vote.id}`}>{`${vote.title.replace(abbr + ':', '')} - ${vote.vote_date}`}</Link>
+              </div>
             }
           }
         }
         return <div key={abbr} className={classNames("vote-agency", abbr.toLowerCase())}>
           <Link 
-            to={`/?s=${abbr.toLowerCase()}`}
+            to={`/${abbr.toLowerCase()}/?s=${search}`}
             className="seal"
             >{abbr}</Link>
             {recentVote}
