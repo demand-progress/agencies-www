@@ -92,6 +92,7 @@
           margin-right: 5px;
           background-repeat: no-repeat;
           background-position: center center;
+          flex-shrink: 0;
         }
         &.vacant{
           .status{
@@ -226,9 +227,6 @@
         }
         &.pending{
           display: flex;
-          &:first-of-type{
-            margin-top: 20px;
-          }
         }
         &.expired{
           .status{

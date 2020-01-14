@@ -31,7 +31,7 @@ export const agencySubtitle = agency => {
     </div>
   </div>
 }
-const filterUnexpiredMembers = status => filter(m => m['term status'].toLowerCase() === status)
+const filterUnexpiredMembers = status => filter(m => (m['term status'] || '').toLowerCase() === status)
 
 export const agenciesWithStatus = status => {
   return pipe(
