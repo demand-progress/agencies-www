@@ -71,17 +71,13 @@ class Agency extends Component {
     const { agency } = this.props
     if (agency['currently enough for quorum'] === 'N/A') return
     let reached = false
-    let label = 'No Quorum'
     if (agency['currently enough for quorum'] === 'Yes') {
       reached = true
-      label = 'Quorum'
     }
-    const votingMembers = parseInt(agency['voting members'], 10)
-    const vacancies = parseInt(agency['vacancies'], 10)
 
     return <div className={classNames("quorum", { reached })}>
       <span>
-        {label} ({votingMembers - vacancies}/{votingMembers})
+        Quorum ({agency['required for quorum']})?
       </span>
     </div>
   }

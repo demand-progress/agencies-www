@@ -27,7 +27,7 @@ export const agencySubtitle = agency => {
     </div>
     <div>
       <div className="label">Partisan Balance:</div>
-      {agency['political balance required'] === 'Yes' ? 'Required' : 'Not Required'}
+      {agency['partisan balance']}
     </div>
   </div>
 }
