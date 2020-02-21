@@ -22,7 +22,7 @@ const PRESIDENTS = [{
   name: 'George W Bush'
 },{
   start: '1-20-2009',
-  name: 'Barrack Obama'
+  name: 'Barack Obama'
 },{
   start: '1-20-2017',
   name: 'Donald Trump'
