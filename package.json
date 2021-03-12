@@ -46,7 +46,7 @@
     "raf": "3.4.0",
     "ramda": "^0.26.1",
     "react": "^16.2.0",
-    "react-dev-utils": "^5.0.0",
+    "react-dev-utils": "^11.0.4",
     "react-device-detect": "^1.11.14",
     "react-dom": "^16.2.0",
     "react-hot-loader": "^4.0.0",
