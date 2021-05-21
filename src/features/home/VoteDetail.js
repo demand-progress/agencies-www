@@ -30,7 +30,7 @@ export default class VoteDetail extends Component {
           <div className="body" dangerouslySetInnerHTML={{ __html: vote.description }}></div>
           <div className="position">
             <div className="good">
-              Our Postion: 
+              Our Position: 
               <div className="block" />
               {vote.preferred_vote}
             </div>

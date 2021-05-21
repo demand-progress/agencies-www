@@ -26,6 +26,9 @@ const PRESIDENTS = [{
 },{
   start: '1-20-2017',
   name: 'Donald Trump'
+},{
+  start: '1-20-2021',
+  name: 'Joe Biden'
 }].reverse()
 
 class Agency extends Component {
